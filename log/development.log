@@ -1,0 +1,101 @@
+  [1m[35mSQL (0.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (20.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250527122355) /*application='TodoList'*/[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 21:04:59.788361', '2026-01-16 21:04:59.788368') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (20.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b90765a94fa00daed76c779826cbbe12c72ff374', '2026-01-16 21:04:59.821087', '2026-01-16 21:04:59.821092') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[35mSQL (1.6ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
+  [1m[35m (125.7ms)[0m  [1m[35mCREATE DATABASE "app_test" ENCODING = 'unicode' /*application='TodoList'*/[0m
+  [1m[35mSQL (2.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (15.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250527122355) /*application='TodoList'*/[0m
+  [1m[35m (27.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 21:05:00.203387', '2026-01-16 21:05:00.203535') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (4.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-01-16 21:05:00.224148' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b90765a94fa00daed76c779826cbbe12c72ff374', '2026-01-16 21:05:00.235571', '2026-01-16 21:05:00.235577') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (5.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Prova de Semiótica', 'Parte básica de semiótica, a prova tem folhinha com textos e imagens.', 2, NULL, '2026-01-23', NULL, '2026-01-16 21:05:00.462432', '2026-01-16 21:05:00.462432') RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (11.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (2.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Apresentação de Artigos', 'Pesquisar artigos relacionados a semiótica e apresentar em grupo.', 1, NULL, '2026-01-30', NULL, '2026-01-16 21:05:00.512475', '2026-01-16 21:05:00.512475') RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (12.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (2.9ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Trabalho Final', 'Produzir projeto de aplicação prática envolvendo semiótica.', 0, NULL, '2026-02-15', NULL, '2026-01-16 21:05:00.564793', '2026-01-16 21:05:00.564793') RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (16.5ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-16 21:05:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (32.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" /*action='index',application='TodoList',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:6
+  Rendered tasks/index.html.erb within layouts/application (Duration: 174.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 223.1ms | GC: 0.0ms)
+Completed 200 OK in 311ms (Views: 182.7ms | ActiveRecord: 51.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/tailwind-567cd33d.css" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/application-bfcdf840.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/turbo.min-1262d735.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus.min-4b1e420e.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/index-ee64e1f1.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/application-3affb389.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/hello_controller-708796bd.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/tasks/1" for 172.18.0.1 at 2026-01-16 21:05:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by TasksController#show as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (3.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:55:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 41.2ms | GC: 33.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 43.3ms | GC: 33.4ms)
+Completed 500 Internal Server Error in 140ms (ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 33.4ms)
+
+
+  
+ActionView::Template::Error (undefined method 'completed' for an instance of Task)
+Caused by: NoMethodError (undefined method 'completed' for an instance of Task)
+
+Information for: ActionView::Template::Error (undefined method 'completed' for an instance of Task):
+    2: 
+    3: <p>
+    4:   <strong>Status:</strong>
+    5:   <%= @task.completed ? 'Concluída' : 'Pendente' %>
+    6: </p>
+    7: 
+    8: <%= link_to 'Editar', edit_task_path(@task) %> |
+  
+app/views/tasks/show.html.erb:5
+
+Information for cause: NoMethodError (undefined method 'completed' for an instance of Task):
+  
+app/views/tasks/show.html.erb:5
