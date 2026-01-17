@@ -1,115 +1,64 @@
-# app/controllers/boards_controller.rb
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :set_board, only: [:update, :destroy]
 
-  # GET /boards
-  def index
-    @boards = Board.order(created_at: :asc)
-  end
-
-  # GET /boards/new
-  def new
-    @board = Board.new
-  end
-
-  # POST /boards or /boards.json
+  # POST /boards or /boards.turbo_stream
   def create
-    # --- Linhas de Diagnóstico ---
-    Rails.logger.debug "--- BOARDS_CONTROLLER#CREATE ---"
-    Rails.logger.debug "Request Format Symbol: #{request.format.symbol.inspect}" # Crucial!
-    Rails.logger.debug "Request Content-Type: #{request.content_type.inspect}"
-    Rails.logger.debug "Request Accept Header: #{request.headers['Accept'].inspect}"
-    # A linha com turbo_stream_request? foi removida.
-    # Em vez disso, podemos usar request.format.turbo_stream? se precisarmos de uma verificação booleana.
-    Rails.logger.debug "Is request.format.turbo_stream?: #{request.format.turbo_stream?.inspect}"
-
-    if Mime::Type.lookup_by_extension(:turbo_stream)
-      Rails.logger.debug "Mime[:turbo_stream] symbol: #{Mime[:turbo_stream].symbol.inspect}"
-      Rails.logger.debug "Mime[:turbo_stream] string: #{Mime[:turbo_stream].to_s.inspect}"
-    else
-      Rails.logger.warn "Mime type for :turbo_stream NOT FOUND in Mime::Type lookup!"
-    end
-    # --- Fim das Linhas de Diagnóstico ---
-
-    @board = Board.new(board_params_for_create)
-    @board.name = "Novo Board" if @board.name.blank?
+    @board = Board.new(board_params_with_defaults)
 
     respond_to do |format|
       if @board.save
+        session[:board_id] = @board.id
+
         format.turbo_stream do
-          Rails.logger.debug "Board SAVED - Responding with TURBO_STREAM"
           render turbo_stream: [
-            turbo_stream.replace("add_new_board_placeholder",
-                                 partial: "boards/board",
-                                 locals: { board: @board, start_editing_name: true }),
-            turbo_stream.append("boards_list_container",
-                                partial: "boards/add_new_board_placeholder")
+            # Insere o novo board ANTES do formulário/botão de criação
+            turbo_stream.before("new_board_form", partial: "boards/board",
+              locals: { board: @board, current_board: @board, start_editing_name: true }),
+            
+            # Limpa as listas e tarefas da tela para exibir as do novo board (que estão vazias)
+            turbo_stream.update("lists_container", "")
           ]
         end
-        format.html do
-          Rails.logger.debug "Board SAVED - Responding with HTML"
-          redirect_to tasks_path, notice: "Board criado com sucesso."
-        end
+        format.html { redirect_to root_path, notice: 'Board criado com sucesso.' }
       else
-        format.turbo_stream do
-          Rails.logger.debug "Board NOT SAVED - Responding with TURBO_STREAM (errors), Status: unprocessable_entity"
-          render turbo_stream: turbo_stream.prepend("boards_list_container",
-                                                   partial: "shared/turbo_flash",
-                                                   locals: { alert: @board.errors.full_messages.join(", ") }),
-                 status: :unprocessable_entity
-        end
         format.html do
-          Rails.logger.debug "Board NOT SAVED - Responding with HTML (errors)"
+          # Lógica para lidar com erro em requisição HTML
           @boards = Board.order(:name)
+          @lists = @current_board&.lists&.includes(:tasks)&.order(:position)
           flash.now[:alert] = @board.errors.full_messages.join(", ")
-          render :new, status: :unprocessable_entity
+          render 'tasks/index', status: :unprocessable_entity
         end
       end
     end
   end
 
-  # GET /boards/:id
-  def show
-    # @board é definido pelo before_action
-  end
-
-  # GET /boards/:id/edit
-  def edit
-    # @board é definido pelo before_action
-  end
-
-  # PATCH/PUT /boards/:id or /boards/:id.json
   def update
-    # @board é definido pelo before_action
     respond_to do |format|
       if @board.update(board_params)
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id(@board),
-                                                   partial: "boards/board",
-                                                   locals: { board: @board })
-        end
-        format.html { redirect_to tasks_path, notice: "Board was successfully updated." }
-        format.json { render json: { id: @board.id, name: @board.name, description: @board.description }, status: :ok }
+        format.json { render json: @board, status: :ok }
+        format.html { redirect_to root_path, notice: 'Board atualizado.' }
       else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id(@board),
-                                                   partial: "boards/board",
-                                                   locals: { board: @board }),
-                 status: :unprocessable_entity
-        end
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @board.errors.full_messages }, status: :unprocessable_entity }
+        format.html { render 'tasks/index', status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /boards/:id
   def destroy
-    # @board é definido pelo before_action
     @board.destroy
+
+    # Se o board excluído era o que estava ativo na sessão,
+    # define o primeiro board da lista como o novo ativo.
+    if session[:board_id] == @board.id
+      session[:board_id] = Board.order(:name).first&.id
+    end
+
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@board)) }
-      format.html { redirect_to tasks_path, notice: "Board excluído com sucesso.", status: :see_other }
+      # Para requisições Turbo Stream e HTML, a melhor resposta é um redirecionamento.
+      # O Turbo vai interceptar e fazer a transição de forma inteligente.
+      # A notice garante que o usuário veja uma confirmação.
+      format.turbo_stream { redirect_to root_path, notice: 'Board excluído com sucesso.' }
+      format.html { redirect_to root_path, notice: "Board excluído com sucesso.", status: :see_other }
     end
   end
 
@@ -119,12 +68,24 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
   end
 
+  # Usa .fetch para não quebrar se o param 'board' não existir
   def board_params
-    params.require(:board).permit(:name, :description, :color)
+    params.fetch(:board, {}).permit(:name)
   end
 
-  def board_params_for_create
-    params.fetch(:board, {}).permit(:name, :description, :color)
+  # Lida com a criação de um nome padrão se nenhum for enviado
+  def board_params_with_defaults
+    p = board_params
+    if p[:name].blank?
+      base_name = "Novo Board"
+      new_name = base_name
+      i = 1
+      while Board.exists?(name: new_name)
+        new_name = "#{base_name} (#{i})"
+        i += 1
+      end
+      p[:name] = new_name
+    end
+    p
   end
-
 end
