@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :boards do
-    resources :tasks, shallow: true do # Creates nested routes for index, new, create
-                                     # And shallow routes for show, edit, update, destroy (e.g., /tasks/:id)
+    # Tasks are nested under boards for creation (index, new, create)
+    # Shallow nesting makes routes for individual tasks (show, edit, update, destroy) top-level (e.g., /tasks/:id)
+    resources :tasks, shallow: true do
       member do
         patch :complete
         patch :snooze
