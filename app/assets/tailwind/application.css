@@ -1,24 +1,33 @@
+/* Este @config é importante, mantenha-o no topo */
+@config "../../../config/tailwind.config.js";
+
+/* Este @import carrega todos os utilitários do Tailwind */
 @import "tailwindcss";
+@import "./_lists.css";
+@import "./_tasks.css";
 
-.task-checkbox {
-  @apply w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out;
+body{
+  @apply bg-gray-50;
+  @apply dark:bg-gray-700
 }
 
-.task-checkbox:hover {
-  @apply border-blue-500 scale-110;
+.button-primary {
+  @apply text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer p-1;
+  /* Estilos do dark mode DENTRO da própria classe do componente */
+  @apply dark:text-red-600 dark:hover:text-red-800;
 }
 
-.task-checkbox.checked {
-  @apply bg-blue-600 border-blue-600;
+.button-secondary {
+  @apply py-2 px-3 bg-gray-200 text-gray-800 font-semibold rounded-md;
+  @apply hover:bg-gray-300;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
+  /* Estilos do dark mode DENTRO da própria classe do componente */
+  @apply dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:focus:ring-offset-gray-900;
 }
 
 /* Classe para a rotação do ícone da seta */
 .rotate-180 {
   transform: rotate(180deg);
-}
-
-.button-primary {
-  @apply text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer p-1;
 }
 
 .float-menu{
