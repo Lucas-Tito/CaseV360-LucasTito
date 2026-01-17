@@ -1,28 +1,49 @@
-/* Este @config é importante, mantenha-o no topo */
+:root {
+  --color-accent: oklch(54.6% 0.245 262.881);
+  --color-accent-hover: oklch(42.4% 0.199 265.638);
+
+  --color-primary: oklch(21% 0.034 264.665);
+  --color-secondary: oklch(37.3% 0.034 259.733);
+  --color-tertiary: oklch(55.1% 0.027 264.364);
+
+  --color-surface: oklch(92.8% 0.006 264.531);
+  --color-background: oklch(98.5% 0.002 247.839);
+  --color-background-hover: oklch(96.7% 0.003 264.542);
+}
+
+:root.dark {
+  --color-accent: oklch(70% 0.245 262.881); 
+  --color-accent-hover: oklch(60% 0.199 265.638);
+
+  --color-primary: oklch(85% 0.034 264.665);   
+  --color-secondary: oklch(75% 0.034 259.733);
+  --color-tertiary: oklch(65% 0.027 264.364);
+
+  --color-surface: oklch(25% 0.006 264.531);   
+  --color-background: oklch(15% 0.002 247.839); 
+  --color-background-hover: oklch(22% 0.003 264.542);
+}
+
 @config "../../../config/tailwind.config.js";
 
 /* Este @import carrega todos os utilitários do Tailwind */
 @import "tailwindcss";
 @import "./_lists.css";
 @import "./_tasks.css";
+@import "./_sidebar.css";
 
 body{
-  @apply bg-gray-50;
-  @apply dark:bg-gray-700
+  @apply bg-[var(--color-background)];
 }
 
 .button-primary {
-  @apply text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer p-1;
-  /* Estilos do dark mode DENTRO da própria classe do componente */
-  @apply dark:text-red-600 dark:hover:text-red-800;
+  @apply text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium cursor-pointer p-1;
 }
 
 .button-secondary {
   @apply py-2 px-3 bg-gray-200 text-gray-800 font-semibold rounded-md;
   @apply hover:bg-gray-300;
   @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
-  /* Estilos do dark mode DENTRO da própria classe do componente */
-  @apply dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:focus:ring-offset-gray-900;
 }
 
 /* Classe para a rotação do ícone da seta */
