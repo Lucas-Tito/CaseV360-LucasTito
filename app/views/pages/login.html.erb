@@ -1,0 +1,115 @@
+<div data-controller="authentication" class="login-page-container">
+  <div class="text-center">
+    <h1 class="login-title">
+      <%= t("login.defaults.title") %>
+    </h1>
+    <p class="login-subtitle">
+      <%= t("login.defaults.subtitle") %>
+    </p>
+    <button data-action="click->authentication#signInWithGoogle"
+    data-authentication-target="loginButton"
+    class="login-google-button">
+      <%= t("login.defaults.login-button") %>
+      <%= render "shared/icons/google_icon", css_class: "w-5 h-5 stroke-white inline-block align-middle" %>
+    </button>
+  </div>
+
+  <div data-controller="theme">
+    <button type="button" data-action="click->theme#toggle" class="login-theme-switcher">
+      <%= render "shared/icons/moon_icon", css_class: "h-6 w-6" %>
+      <%= render "shared/icons/sun_icon", css_class: "h-6 w-6 hidden" %>
+    </button>
+  </div>
+
+  <div class="features-cards-section">
+    <div class="width-limiter-container">
+      <div class="feature-cards-section-text-container">
+        <div class="flex-1">
+          <h1 class="feature-cards-section-title">
+            <%= t("login.defaults.features-title") %>
+          </h1>
+        </div>
+        <div class="flex-1">
+          <p class="feature-cards-section-subtitle">
+            <%= t("login.defaults.features-subtitle") %>
+          </p>
+        </div>
+      </div>
+      
+      <!-- SVGs Cards -->
+      <div class="flex justify-between mt-6">
+        <div class="cards-container"
+             data-controller="card-hover" 
+             data-action="mouseenter->card-hover#showGif mouseleave->card-hover#hideGif">
+          
+          <!-- Card -->
+          <div data-card-hover-target="card" class="card-svg-container">
+            <%= render "shared/icons/fastfoward_icon", css_class: "w-20 h-20 fill-[var(--color-secondary)]" %>
+            <h3 class="card-svg-title">
+              <%= t("login.defaults.agility-card") %>
+            </h3>
+          </div>
+          
+          <!-- Hover GIF -->
+          <div data-card-hover-target="gif" class="card-gif-container">
+            <%= image_tag "agility_gif.gif", alt: "Demonstração de agilidade", class: "card-gif" %>
+          </div>
+        </div>
+        
+        <div class="cards-container"
+             data-controller="card-hover" 
+             data-action="mouseenter->card-hover#showGif mouseleave->card-hover#hideGif">
+          
+          <!-- Card -->
+          <div data-card-hover-target="card" class="card-svg-container">
+            <%= render "shared/icons/team_icon", css_class: "w-20 h-20 stroke-[var(--color-secondary)]" %>
+            <h3 class="card-svg-title">
+              <%= t("login.defaults.collaboration-card") %>
+            </h3>
+          </div>
+          
+          <!-- Hover GIF -->
+          <div data-card-hover-target="gif" class="card-gif-container">
+            <%= image_tag "agility_gif.gif", alt: "Demonstração de colaboração", class: "card-gif" %>
+          </div>
+        </div>
+
+        <div class="cards-container" 
+             data-controller="card-hover" 
+             data-action="mouseenter->card-hover#showGif mouseleave->card-hover#hideGif">
+          
+          <!-- Card -->
+          <div data-card-hover-target="card" class="card-svg-container">
+            <%= render "shared/icons/paint_brush_icon", css_class: "w-20 h-20 stroke-[var(--color-secondary)]" %>
+            <h3 class="card-svg-title">
+              <%= t("login.defaults.customization-card") %>
+            </h3>
+          </div>
+          
+          <!-- Hover GIF -->
+          <div data-card-hover-target="gif" class="card-gif-container">
+            <%= image_tag "customization_gif.gif", alt: "Demonstração de customização", class: "card-gif" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI GIF Section -->
+  <div class="ai-gif-section">
+    <div class="ai-gif-container">
+      <div class="ai-gif-text-container">
+        <h1 class="ai-gif-title">
+          <%= t("login.defaults.ai-feat-title") %>
+        </h1>
+        <p class="ai-gif-subtitle">
+            <%= t("login.defaults.ai-feat-description") %>
+        </p>
+      </div>
+      <div class="flex-shrink-0">
+        <%= image_tag "gif_summarize_tasks.gif", alt: "Demonstração de UX", class: "ai-gif" %>
+      </div>
+    </div>
+  </div>
+
+</div>
