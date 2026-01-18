@@ -1,20 +1,29 @@
 en:
   lists:
-    default-name: "New List"
-    default-description: "Click here to add a description"
-    add-task: "Add Task"
-    delete-list: "Delete List"
-    new-list: "+ New List"
+    defaults:
+      name: "New List"
+      description: "Click here to add a description"
+      empty-list: "No tasks added yet."
+      add-task: "Add Task"
+      delete-list: "Delete List"
+      new-list: "+ New List"
   tasks:
-    default-name: "New Task"
-    default-description: "Add a description..."
-    delete-task: "Delete Task"
-    completed-tasks: "Completed"
+    defaults:
+      name: "New Task"
+      description: "Add a description..."
+      delete-task: "Delete Task"
+      completed-tasks: "Completed"
     priorities:
       low: "Low"
       medium: "Medium"
       high: "High"
   boards:
-    default-name: "New Board"
-    my-boards: "My Boards"
-    new-board: "+ Create New Board"
+    defaults:
+      name: "New Board"
+      my-boards: "My Boards"
+      new-board: "+ Create New Board"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"  
+      long: "%B %d, %Y"

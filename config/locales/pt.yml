@@ -1,20 +1,33 @@
 pt:
   lists:
-    default-name: "Nova Lista"
-    default-description: "Clique para adicionar uma descrição"
-    add-task: "Adicionar Tarefa"
-    delete-list: "Excluir Lista"
-    new-list: "+ Nova Lista"
+    defaults:
+      name: "Nova Lista"
+      description: "Clique para adicionar uma descrição"
+      empty-list: "Nenhuma tarefa adicionada ainda."
+      add-task: "Adicionar Tarefa"
+      delete-list: "Excluir Lista"
+      new-list: "+ Nova Lista"
   tasks:
-    default-name: "Nova Task"
-    default-description: "Adicione uma descrição..."
-    delete-task: "Excluir Tarefa"
-    completed-tasks: "Concluídas"
+    defaults:
+      name: "Nova Task"
+      description: "Adicione uma descrição..."
+      delete-task: "Excluir Tarefa"
+      completed-tasks: "Concluídas"
     priorities:
       low: "Baixa"
       medium: "Média"
       high: "Alta"
   boards:
-    default-name: "Novo Board"
-    my-boards: "Meus Boards"
-    new-board: "+ Criar Novo Board"
+    defaults:
+      name: "Novo Board"
+      my-boards: "Meus Boards"
+      new-board: "+ Criar Novo Board"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %b" 
+      long: "%d de %B de %Y"
+    day_names: [Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado]
+    abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
+    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
