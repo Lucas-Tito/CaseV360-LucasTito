@@ -12,8 +12,8 @@
   </div>
 
   <% if @lists.empty? %>
-    <div class="text-center py-10 mt-[-2rem]">
-      <p class="text-xl text-gray-500">Nenhum list encontrado ainda.</p>
+    <div id="empty_board_message" class="text-center py-10 mt-[-2rem]">
+      <p class="text-xl text-gray-500"><%= t("boards.defaults.empty-board") %></p>
     </div>
   <% end %>
 </div>
