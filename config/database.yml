@@ -14,13 +14,11 @@ test:
   <<: *default
   database: app_test # It's possible to config a POSTGRES_DB_TEST
 
-# Adjust production config as needed,
-# wont't be used by docker-compose in development.
 production:
   primary:
-    <<: *default
+    adapter: postgresql
     url: <%= ENV['DATABASE_URL'] %>
 
   cable:
-    <<: *default
+    adapter: postgresql
     url: <%= ENV['DATABASE_URL'] %>
