@@ -13,7 +13,6 @@ export default class extends Controller {
       console.log("Authentication controller connected with Firebase");
       this.auth = window.firebase.auth();
       this.setupAuthStateListener();
-      this.checkForRedirectResult();
     } else {
       console.error("Firebase not available, retrying in 1 second...");
       setTimeout(() => this.initializeFirebase(), 1000);
@@ -37,42 +36,15 @@ export default class extends Controller {
       provider.addScope('profile');
       provider.addScope('email');
 
-      let result;
+      console.log("Starting Google sign-in popup...");
+      const result = await this.auth.signInWithPopup(provider);
       
-      // Use popup for development, redirect for production
-      if (window.FIREBASE_DEV_MODE) {
-        console.log("Starting Google sign-in popup (development mode)...");
-        result = await this.auth.signInWithPopup(provider);
-      } else {
-        console.log("Starting Google sign-in redirect (production mode)...");
-        await this.auth.signInWithRedirect(provider);
-        return; // signInWithRedirect doesn't return a result immediately
-      }
-
       console.log("Sign-in successful:", result.user.email);
       // User state change will be handled by the auth state listener
       
     } catch (error) {
       console.error("Sign-in error:", error);
       this.showError(`Erro no login: ${error.message}`);
-    }
-  }
-
-  async checkForRedirectResult() {
-    try {
-      console.log("Checking for redirect result...");
-      const result = await this.auth.getRedirectResult();
-      console.log("Redirect result:", result);
-      
-      if (result.user) {
-        console.log("User from redirect:", result.user.email);
-        // User state change will be handled by the auth state listener
-      } else {
-        console.log("No redirect result found");
-      }
-    } catch (error) {
-      console.error("Error getting redirect result:", error);
-      this.showError(`Erro na autenticação: ${error.message}`);
     }
   }
 
