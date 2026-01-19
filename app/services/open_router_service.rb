@@ -6,13 +6,10 @@ class OpenRouterService
 
   # Available free models in order of preference
   FREE_MODELS = [
-    "deepseek/deepseek-chat-v3-0324:free",
-    "deepseek/deepseek-chat:free",
-    "mistralai/mistral-7b-instruct:free",
-    "huggingface/zephyr-7b-beta:free",
-    "openchat/openchat-7b:free",
-    "meta-llama/llama-3.2-3b-instruct:free",
-    "microsoft/phi-3-mini-128k-instruct:free"
+    "nvidia/nemotron-3-nano-30b-a3b:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "tngtech/deepseek-r1t-chimera:free",
+    "xiaomi/mimo-v2-flash:free"
   ].freeze
 
   # Default parameters for the API

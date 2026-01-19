@@ -829,3 +829,864 @@ Formatted task: - "New Task"
 Completed 200 OK in 13465ms (Views: 0.5ms | ActiveRecord: 3.3ms (41 queries, 33 cached) | GC: 1.4ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (4.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (33.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (6.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (16.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (24.0ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-19 19:19:54 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/login.html.erb within layouts/application
+  Rendered shared/icons/_google_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 1.3ms | GC: 0.0ms)
+  Rendered shared/icons/_fastfoward_icon.html.erb (Duration: 1.3ms | GC: 0.0ms)
+  Rendered shared/icons/_team_icon.html.erb (Duration: 4.1ms | GC: 0.0ms)
+  Rendered shared/icons/_paint_brush_icon.html.erb (Duration: 5.6ms | GC: 0.0ms)
+  Rendered pages/login.html.erb within layouts/application (Duration: 134.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 208.9ms | GC: 0.0ms)
+Completed 200 OK in 364ms (Views: 217.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/assets/controllers/authentication_controller-9d03bd79.js" for 172.18.0.1 at 2026-01-19 19:19:55 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started POST "/login" for 172.18.0.1 at 2026-01-19 19:19:57 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as */*
+  Parameters: {"id_token" => "[FILTERED]", "session" => {"id_token" => "[FILTERED]"}}
+Received login request with token: present
+Request headers: {"HTTP_HOST" => "127.0.0.1:3000", "HTTP_USER_AGENT" => "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0", "HTTP_ACCEPT" => "*/*", "HTTP_ACCEPT_LANGUAGE" => "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7", "HTTP_ACCEPT_ENCODING" => "gzip, deflate, br, zstd", "HTTP_REFERER" => "http://127.0.0.1:3000/", "HTTP_X_CSRF_TOKEN" => "3U6TvXfy2Pmb7LqCpsFDDsuX0c71X870keeqkrXDvh8EQgQuiht6hzvM-VvRt0kJYeh9rAeup2n9yUoOHB527Q", "HTTP_ORIGIN" => "http://127.0.0.1:3000", "HTTP_DNT" => "1", "HTTP_CONNECTION" => "keep-alive", "HTTP_COOKIE" => "_todo_list_session=4ru8BUGDnr79%2F3%2FVOL1dOVaaXiPCDwmN6P7J%2FA56zyptgxqUuyIRNRTrLd3mX%2Fx4Kn5u1%2BazQUiMmMMmysudRJAeTMZyUyXY5pXx2h7ehagIcNZFXJ%2BxG8ZNxv%2FJu3TwCC67yvPfdA13%2F4hFqQoLfGaRCIFF%2BXNlJIP9qeRUIJ0srN0yL2YQpbreeGecNN8GMXBU6aH6qyjQ%2BzsQNGzI5qQDJNWZ1vHcnloy5SPFTnctO5aspPWHtCtowSfeX4kDEkzIsxK1uKTjzizCSleqAZ5YM1AiOKCnE7c%3D--ViBKY%2F0Wi36Xgx%2Bv--HpRg6jkineTrNGUf6PaXAg%3D%3D", "HTTP_SEC_FETCH_DEST" => "empty", "HTTP_SEC_FETCH_MODE" => "cors", "HTTP_SEC_FETCH_SITE" => "same-origin", "HTTP_PRIORITY" => "u=4", "HTTP_VERSION" => "HTTP/1.1"}
+Attempting to decode JWT token...
+Token decoded successfully. Payload keys: ["name", "picture", "iss", "aud", "auth_time", "user_id", "sub", "iat", "exp", "email", "email_verified", "firebase"]
+Token header: {"alg" => "RS256", "kid" => "082e975e07dfa4960c7b7b4fc1d10f916dc2f55b", "typ" => "JWT"}
+User email: lucassga500@gmail.com
+Token issuer: https://securetoken.google.com/todolist-ruby
+Token audience: todolist-ruby
+Token subject: cgebc5219iUWA5NgMVU8Fm0wCEW2
+Token validation passed. Creating/finding user...
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."uid" = 'cgebc5219iUWA5NgMVU8Fm0wCEW2' LIMIT 1 /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+User authenticated successfully: lucassga500@gmail.com (ID: 2)
+Completed 200 OK in 216ms (Views: 1.0ms | ActiveRecord: 23.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/boards" for 172.18.0.1 at 2026-01-19 19:19:58 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (1.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."id" ASC LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (2.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 1.6ms | GC: 0.0ms)
+  Rendered lists/_color_selection.html.erb (Duration: 2.0ms | GC: 0.0ms)
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_calendar_icon.html.erb (Duration: 2.1ms | GC: 0.0ms)
+  Rendered shared/icons/_graph_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered tasks/_task.html.erb (Duration: 34.6ms | GC: 0.0ms)
+  Rendered lists/_completed_tasks_section.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered lists/_tasks_container.html.erb (Duration: 38.5ms | GC: 0.0ms)
+  Rendered lists/_list.html.erb (Duration: 57.0ms | GC: 0.0ms)
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 10.4ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 237.6ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  [1m[36mBoard Load (1.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 8.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 62.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 312.5ms | GC: 0.0ms)
+Completed 200 OK in 555ms (Views: 307.3ms | ActiveRecord: 20.9ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/lists/4" for 172.18.0.1 at 2026-01-19 19:20:06 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ListsController#update as JSON
+  Parameters: {"list" => {"name" => "QUalquer coisa"}, "id" => "4"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mList Load (0.9ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC LIMIT 1 /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:107:in 'ListsController#set_list'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:73:in 'block in ListsController#update'
+  [1m[36mList Update (10.0ms)[0m  [1m[33mUPDATE "lists" SET "name" = 'QUalquer coisa', "updated_at" = '2026-01-19 19:20:06.720798' WHERE "lists"."id" = 4 /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:73:in 'block in ListsController#update'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*action='update',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:73:in 'block in ListsController#update'
+Completed 200 OK in 138ms (Views: 1.5ms | ActiveRecord: 14.6ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 19:20:07 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#show as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 1.4ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 1.2ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 16.6ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 3.7ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 25.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 45.6ms | GC: 0.0ms)
+Completed 200 OK in 93ms (Views: 47.3ms | ActiveRecord: 2.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai" for 172.18.0.1 at 2026-01-19 19:20:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "board_ids" => ["2"], "commit" => "Gerar Resumo"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.9ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Pluck (0.8ms)[0m  [1m[34mSELECT "boards"."id" FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/ais_controller.rb:18:in 'AisController#create'
+  [1m[36mTask Exists? (4.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:45:in 'OpenRouterService#call'
+User message being sent to AI:
+  [1m[36mCACHE Task Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1[0m
+  ↳ app/services/open_router_service.rb:76:in 'OpenRouterService#user_message'
+  [1m[36mTask Count (20.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+  [1m[36mTask Load (1.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:80:in 'OpenRouterService#user_message'
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Análise de tarefas dos boards: Meu Primeiro Board
+
+⚪ SEM PRIORIDADE DEFINIDA:
+- "New Task"
+
+
+Total: 1 tarefas em 1 board(s)
+Para recomendações, considere:
+- Tarefas com alta prioridade são mais importantes
+- Tarefas vencidas precisam atenção imediata
+- Tarefas próximas do vencimento devem ser priorizadas
+- Tarefas sem prazo podem ser deixadas para depois
+
+IMPORTANTE: Sempre mencione as tarefas pelo nome exato que aparece entre aspas acima, nunca use 'tarefa 1', 'tarefa 2' ou termos genéricos.
+
+==================================================
+Trying model: deepseek/deepseek-chat-v3-0324:free (attempt 1/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model deepseek/deepseek-chat-v3-0324:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for deepseek/deepseek-chat-v3-0324:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: deepseek/deepseek-chat:free (attempt 2/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model deepseek/deepseek-chat:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for deepseek/deepseek-chat:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: mistralai/mistral-7b-instruct:free (attempt 3/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model mistralai/mistral-7b-instruct:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for mistralai/mistral-7b-instruct:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: huggingface/zephyr-7b-beta:free (attempt 4/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model huggingface/zephyr-7b-beta:free failed: 400 - Bad Request
+Response body: {"error":{"message":"huggingface/zephyr-7b-beta:free is not a valid model ID","code":400},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: openchat/openchat-7b:free (attempt 5/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model openchat/openchat-7b:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for openchat/openchat-7b:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: meta-llama/llama-3.2-3b-instruct:free (attempt 6/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model meta-llama/llama-3.2-3b-instruct:free failed: 429 - Too Many Requests
+Response body: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"meta-llama/llama-3.2-3b-instruct:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations","provider_name":"Venice","is_byok":false}},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: microsoft/phi-3-mini-128k-instruct:free (attempt 7/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model microsoft/phi-3-mini-128k-instruct:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for microsoft/phi-3-mini-128k-instruct:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+  Rendered ais/_summary_response.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 3177ms (Views: 1.6ms | ActiveRecord: 31.0ms (46 queries, 38 cached) | GC: 48.1ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (1.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (1.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-19 19:21:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (1.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+Redirected to http://127.0.0.1:3000/app
+Filter chain halted as :redirect_if_authenticated rendered or redirected
+Completed 302 Found in 367ms (ActiveRecord: 69.6ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/app" for 172.18.0.1 at 2026-01-19 19:21:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (2.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  [1m[36mTask Load (1.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 2.2ms | GC: 0.0ms)
+  Rendered lists/_color_selection.html.erb (Duration: 6.3ms | GC: 0.0ms)
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_calendar_icon.html.erb (Duration: 31.2ms | GC: 0.0ms)
+  Rendered shared/icons/_graph_icon.html.erb (Duration: 6.7ms | GC: 0.0ms)
+  Rendered tasks/_task.html.erb (Duration: 88.2ms | GC: 0.0ms)
+  Rendered lists/_completed_tasks_section.html.erb (Duration: 1.5ms | GC: 0.0ms)
+  Rendered lists/_tasks_container.html.erb (Duration: 98.0ms | GC: 0.0ms)
+  Rendered lists/_list.html.erb (Duration: 140.5ms | GC: 0.0ms)
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 7.3ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 330.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  [1m[36mBoard Load (2.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 6.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 35.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 462.7ms | GC: 0.0ms)
+Completed 200 OK in 608ms (Views: 465.8ms | ActiveRecord: 14.9ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 19:21:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#show as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 10.3ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 4.3ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 32.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 60.8ms | GC: 0.0ms)
+Completed 200 OK in 130ms (Views: 66.4ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai" for 172.18.0.1 at 2026-01-19 19:21:51 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "board_ids" => ["2"], "commit" => "Gerar Resumo"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Pluck (0.7ms)[0m  [1m[34mSELECT "boards"."id" FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/ais_controller.rb:18:in 'AisController#create'
+  [1m[36mTask Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:39:in 'OpenRouterService#call'
+User message being sent to AI:
+  [1m[36mCACHE Task Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1[0m
+  ↳ app/services/open_router_service.rb:70:in 'OpenRouterService#user_message'
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:73:in 'OpenRouterService#user_message'
+Total tasks received: 1
+  [1m[36mTask Load (1.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:74:in 'OpenRouterService#user_message'
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:144:in 'OpenRouterService#user_message'
+Análise de tarefas dos boards: Meu Primeiro Board
+
+⚪ SEM PRIORIDADE DEFINIDA:
+- "New Task"
+
+
+Total: 1 tarefas em 1 board(s)
+Para recomendações, considere:
+- Tarefas com alta prioridade são mais importantes
+- Tarefas vencidas precisam atenção imediata
+- Tarefas próximas do vencimento devem ser priorizadas
+- Tarefas sem prazo podem ser deixadas para depois
+
+IMPORTANTE: Sempre mencione as tarefas pelo nome exato que aparece entre aspas acima, nunca use 'tarefa 1', 'tarefa 2' ou termos genéricos.
+
+==================================================
+Trying model: deepseek/deepseek-chat-v3-0324:free (attempt 1/1)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:73:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:144:in 'OpenRouterService#user_message'
+Model deepseek/deepseek-chat-v3-0324:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for deepseek/deepseek-chat-v3-0324:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+  Rendered ais/_summary_response.html.erb (Duration: 2.2ms | GC: 0.0ms)
+Completed 200 OK in 646ms (Views: 0.1ms | ActiveRecord: 8.1ms (16 queries, 8 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (1.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (1.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-19 19:25:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+Redirected to http://127.0.0.1:3000/app
+Filter chain halted as :redirect_if_authenticated rendered or redirected
+Completed 302 Found in 202ms (ActiveRecord: 42.3ms (2 queries, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/app" for 172.18.0.1 at 2026-01-19 19:25:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (1.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (3.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 1.4ms | GC: 0.0ms)
+  Rendered lists/_color_selection.html.erb (Duration: 4.5ms | GC: 0.0ms)
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_calendar_icon.html.erb (Duration: 23.6ms | GC: 0.0ms)
+  Rendered shared/icons/_graph_icon.html.erb (Duration: 4.6ms | GC: 0.0ms)
+  Rendered tasks/_task.html.erb (Duration: 63.7ms | GC: 0.0ms)
+  Rendered lists/_completed_tasks_section.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered lists/_tasks_container.html.erb (Duration: 72.6ms | GC: 0.0ms)
+  Rendered lists/_list.html.erb (Duration: 111.1ms | GC: 0.0ms)
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 4.2ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 261.3ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 1.7ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  [1m[36mBoard Load (2.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 7.7ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 48.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 382.2ms | GC: 0.0ms)
+Completed 200 OK in 597ms (Views: 386.0ms | ActiveRecord: 15.2ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 19:25:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#show as HTML
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.9ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 17.9ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 4.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 25.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 62.5ms | GC: 0.0ms)
+Completed 200 OK in 137ms (Views: 72.4ms | ActiveRecord: 3.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai" for 172.18.0.1 at 2026-01-19 19:25:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "board_ids" => ["2"], "commit" => "Gerar Resumo"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Pluck (0.7ms)[0m  [1m[34mSELECT "boards"."id" FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/ais_controller.rb:18:in 'AisController#create'
+  [1m[36mTask Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:39:in 'OpenRouterService#call'
+User message being sent to AI:
+  [1m[36mCACHE Task Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1[0m
+  ↳ app/services/open_router_service.rb:70:in 'OpenRouterService#user_message'
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:73:in 'OpenRouterService#user_message'
+Total tasks received: 1
+  [1m[36mTask Load (1.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:74:in 'OpenRouterService#user_message'
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mList Load (1.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:144:in 'OpenRouterService#user_message'
+Análise de tarefas dos boards: Meu Primeiro Board
+
+⚪ SEM PRIORIDADE DEFINIDA:
+- "New Task"
+
+
+Total: 1 tarefas em 1 board(s)
+Para recomendações, considere:
+- Tarefas com alta prioridade são mais importantes
+- Tarefas vencidas precisam atenção imediata
+- Tarefas próximas do vencimento devem ser priorizadas
+- Tarefas sem prazo podem ser deixadas para depois
+
+IMPORTANTE: Sempre mencione as tarefas pelo nome exato que aparece entre aspas acima, nunca use 'tarefa 1', 'tarefa 2' ou termos genéricos.
+
+==================================================
+Trying model: meta-llama/llama-3.3-70b-instruct:free (attempt 1/1)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:73:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:79:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:144:in 'OpenRouterService#user_message'
+  Rendered ais/_summary_response.html.erb (Duration: 3.6ms | GC: 0.0ms)
+Completed 200 OK in 13523ms (Views: 0.2ms | ActiveRecord: 7.8ms (16 queries, 8 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (1.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.9ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-19 19:30:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (1.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+Redirected to http://127.0.0.1:3000/app
+Filter chain halted as :redirect_if_authenticated rendered or redirected
+Completed 302 Found in 298ms (ActiveRecord: 74.5ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/app" for 172.18.0.1 at 2026-01-19 19:30:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (1.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (3.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  [1m[36mTask Load (1.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 2.5ms | GC: 0.0ms)
+  Rendered lists/_color_selection.html.erb (Duration: 4.0ms | GC: 0.0ms)
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_calendar_icon.html.erb (Duration: 10.5ms | GC: 0.0ms)
+  Rendered shared/icons/_graph_icon.html.erb (Duration: 2.0ms | GC: 0.0ms)
+  Rendered tasks/_task.html.erb (Duration: 32.1ms | GC: 0.0ms)
+  Rendered lists/_completed_tasks_section.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered lists/_tasks_container.html.erb (Duration: 36.7ms | GC: 0.0ms)
+  Rendered lists/_list.html.erb (Duration: 80.6ms | GC: 0.0ms)
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 4.5ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 221.2ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 1.6ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  [1m[36mBoard Load (2.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 6.8ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 39.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 309.9ms | GC: 0.0ms)
+Completed 200 OK in 459ms (Views: 309.0ms | ActiveRecord: 13.7ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 19:31:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#show as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 12.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 2.3ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 15.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 38.1ms | GC: 0.0ms)
+Completed 200 OK in 124ms (Views: 44.2ms | ActiveRecord: 3.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai" for 172.18.0.1 at 2026-01-19 19:31:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "board_ids" => ["2"], "commit" => "Gerar Resumo"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Pluck (0.9ms)[0m  [1m[34mSELECT "boards"."id" FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/ais_controller.rb:18:in 'AisController#create'
+  [1m[36mTask Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:42:in 'OpenRouterService#call'
+User message being sent to AI:
+  [1m[36mCACHE Task Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1[0m
+  ↳ app/services/open_router_service.rb:73:in 'OpenRouterService#user_message'
+  [1m[36mTask Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:76:in 'OpenRouterService#user_message'
+Total tasks received: 1
+  [1m[36mTask Load (1.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:77:in 'OpenRouterService#user_message'
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:147:in 'OpenRouterService#user_message'
+Análise de tarefas dos boards: Meu Primeiro Board
+
+⚪ SEM PRIORIDADE DEFINIDA:
+- "New Task"
+
+
+Total: 1 tarefas em 1 board(s)
+Para recomendações, considere:
+- Tarefas com alta prioridade são mais importantes
+- Tarefas vencidas precisam atenção imediata
+- Tarefas próximas do vencimento devem ser priorizadas
+- Tarefas sem prazo podem ser deixadas para depois
+
+IMPORTANTE: Sempre mencione as tarefas pelo nome exato que aparece entre aspas acima, nunca use 'tarefa 1', 'tarefa 2' ou termos genéricos.
+
+==================================================
+Trying model: nvidia/nemotron-3-nano-30b-a3b:free (attempt 1/4)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:76:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:82:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:147:in 'OpenRouterService#user_message'
+  Rendered ais/_summary_response.html.erb (Duration: 2.4ms | GC: 0.0ms)
+Completed 200 OK in 4059ms (Views: 0.2ms | ActiveRecord: 6.9ms (16 queries, 8 cached) | GC: 0.0ms)
+
+
