@@ -31,26 +31,23 @@
       // Set development flag
       window.FIREBASE_DEV_MODE = <%= Rails.env.development? %>;
 
-      // Wait for Firebase to load, then initialize
-      document.addEventListener('DOMContentLoaded', function() {
-        if (typeof firebase !== 'undefined') {
-          try {
-            // Initialize Firebase
-            if (!firebase.apps.length) {
-              firebase.initializeApp(firebaseConfig);
-            }
-            
-            // Make Firebase globally available
-            window.firebase = firebase;
-            
-            console.log('Firebase initialized successfully');
-          } catch (error) {
-            console.error('Firebase initialization error:', error);
+      // Initialize Firebase as soon as the SDK is available so Stimulus controllers can use it.
+      if (typeof firebase !== 'undefined') {
+        try {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
           }
-        } else {
-          console.error('Firebase not loaded');
+
+          // Make Firebase globally available
+          window.firebase = firebase;
+
+          console.log('Firebase initialized successfully');
+        } catch (error) {
+          console.error('Firebase initialization error:', error);
         }
-      });
+      } else {
+        console.error('Firebase not loaded');
+      }
     </script>
     
     <%= yield :head %>

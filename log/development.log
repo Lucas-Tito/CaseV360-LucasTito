@@ -1,347 +1,831 @@
-  [1m[35mSQL (0.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
-  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (29.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (20.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250527122355) /*application='TodoList'*/[0m
-  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (1.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 21:04:59.788361', '2026-01-16 21:04:59.788368') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (20.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b90765a94fa00daed76c779826cbbe12c72ff374', '2026-01-16 21:04:59.821087', '2026-01-16 21:04:59.821092') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[35mSQL (1.6ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
-  [1m[35m (125.7ms)[0m  [1m[35mCREATE DATABASE "app_test" ENCODING = 'unicode' /*application='TodoList'*/[0m
-  [1m[35mSQL (2.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
-  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (15.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250527122355) /*application='TodoList'*/[0m
-  [1m[35m (27.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (4.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 21:05:00.203387', '2026-01-16 21:05:00.203535') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Update (4.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-01-16 21:05:00.224148' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b90765a94fa00daed76c779826cbbe12c72ff374', '2026-01-16 21:05:00.235571', '2026-01-16 21:05:00.235577') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (5.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Prova de Semiótica', 'Parte básica de semiótica, a prova tem folhinha com textos e imagens.', 2, NULL, '2026-01-23', NULL, '2026-01-16 21:05:00.462432', '2026-01-16 21:05:00.462432') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (11.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (2.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Apresentação de Artigos', 'Pesquisar artigos relacionados a semiótica e apresentar em grupo.', 1, NULL, '2026-01-30', NULL, '2026-01-16 21:05:00.512475', '2026-01-16 21:05:00.512475') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (12.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (2.9ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at") VALUES ('Trabalho Final', 'Produzir projeto de aplicação prática envolvendo semiótica.', 0, NULL, '2026-02-15', NULL, '2026-01-16 21:05:00.564793', '2026-01-16 21:05:00.564793') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (16.5ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mTask Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
-Started GET "/" for 172.18.0.1 at 2026-01-16 21:05:11 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-Processing by TasksController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering tasks/index.html.erb within layouts/application
-  [1m[36mTask Load (32.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:6
-  Rendered tasks/index.html.erb within layouts/application (Duration: 174.6ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 223.1ms | GC: 0.0ms)
-Completed 200 OK in 311ms (Views: 182.7ms | ActiveRecord: 51.8ms (1 query, 0 cached) | GC: 0.0ms)
-
-
-Started GET "/assets/tailwind-567cd33d.css" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/application-bfcdf840.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/turbo.min-1262d735.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/stimulus.min-4b1e420e.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/controllers/index-ee64e1f1.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/stimulus-loading-1fc53fe7.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/controllers/application-3affb389.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/assets/controllers/hello_controller-708796bd.js" for 172.18.0.1 at 2026-01-16 21:05:12 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/tasks/1" for 172.18.0.1 at 2026-01-16 21:05:47 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by TasksController#show as HTML
-  Parameters: {"id" => "1"}
-  [1m[36mTask Load (3.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='TodoList',controller='tasks'*/[0m
-  ↳ app/controllers/tasks_controller.rb:55:in 'TasksController#set_task'
-  Rendering layout layouts/application.html.erb
-  Rendering tasks/show.html.erb within layouts/application
-  Rendered tasks/show.html.erb within layouts/application (Duration: 41.2ms | GC: 33.4ms)
-  Rendered layout layouts/application.html.erb (Duration: 43.3ms | GC: 33.4ms)
-Completed 500 Internal Server Error in 140ms (ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 33.4ms)
-
-
-  
-ActionView::Template::Error (undefined method 'completed' for an instance of Task)
-Caused by: NoMethodError (undefined method 'completed' for an instance of Task)
-
-Information for: ActionView::Template::Error (undefined method 'completed' for an instance of Task):
-    2: 
-    3: <p>
-    4:   <strong>Status:</strong>
-    5:   <%= @task.completed ? 'Concluída' : 'Pendente' %>
-    6: </p>
-    7: 
-    8: <%= link_to 'Editar', edit_task_path(@task) %> |
-  
-app/views/tasks/show.html.erb:5
-
-Information for cause: NoMethodError (undefined method 'completed' for an instance of Task):
-  
-app/views/tasks/show.html.erb:5
-  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (4.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-Migrating to CreateBoards (20250602114636)
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[35m (60.4ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250602114636') RETURNING "version" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-Migrating to AddBoardToTasks (20250602115349)
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[35m (70.1ms)[0m  [1m[35mALTER TABLE "tasks" ADD "board_id" bigint NOT NULL /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK /*application='TodoList'*/[0m
-  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-Migrating to AddBoardToTasks (20250602115349)
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[35m (4.0ms)[0m  [1m[35mALTER TABLE "tasks" ADD "board_id" bigint NOT NULL /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK /*application='TodoList'*/[0m
-  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-Migrating to AddBoardToTasks (20250602115349)
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "tasks" ADD "board_id" bigint NOT NULL /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
-  [1m[35m (25.6ms)[0m  [1m[35mCREATE DATABASE "app_development" ENCODING = 'unicode' /*application='TodoList'*/[0m
-  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
-  [1m[35m (111.1ms)[0m  [1m[35mCREATE DATABASE "app_test" ENCODING = 'unicode' /*application='TodoList'*/[0m
-  [1m[35mSQL (3.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (32.7ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
-  [1m[35m (3.5ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_board_id" ON "tasks" ("board_id") /*application='TodoList'*/[0m
-  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_a07f9a9e7e"
-FOREIGN KEY ("board_id")
-  REFERENCES "boards" ("id")
- /*application='TodoList'*/[0m
-  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (4.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250602115349) /*application='TodoList'*/[0m
-  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
-(20250602114636),
-(20250527122355); /*application='TodoList'*/[0m
-  [1m[35m (45.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (13.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 23:52:19.148511', '2026-01-16 23:52:19.148515') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (52.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '795308575d6921dd67c70f5d747de72cf47ae69b', '2026-01-16 23:52:19.184043', '2026-01-16 23:52:19.184045') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35mSQL (1.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
-  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (24.2ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE INDEX "index_boards_on_user_id" ON "boards" ("user_id") /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "position" integer, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE INDEX "index_lists_on_board_id" ON "lists" ("board_id") /*application='TodoList'*/[0m
   [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
-  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
-  [1m[35m (4.5ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_board_id" ON "tasks" ("board_id") /*application='TodoList'*/[0m
-  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_a07f9a9e7e"
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "list_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_list_id" ON "tasks" ("list_id") /*application='TodoList'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "profile_picture_url" character varying, "photo_url" character varying) /*application='TodoList'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_uid" ON "users" ("uid") /*application='TodoList'*/[0m
+  [1m[35m (5.0ms)[0m  [1m[35mALTER TABLE "boards" ADD CONSTRAINT "fk_rails_0732f8ef3d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (8.4ms)[0m  [1m[35mALTER TABLE "lists" ADD CONSTRAINT "fk_rails_0d3f677137"
 FOREIGN KEY ("board_id")
   REFERENCES "boards" ("id")
  /*application='TodoList'*/[0m
-  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250602115349) /*application='TodoList'*/[0m
-  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_02b8df67b5"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (17.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250714135327) /*application='TodoList'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250711135934),
+(20250711135032),
+(20250609165341),
+(20250609155342),
+(20250609142817),
+(20250602115349),
 (20250602114636),
 (20250527122355); /*application='TodoList'*/[0m
-  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (1.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-16 23:52:58.094239', '2026-01-16 23:52:58.094242') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-19 00:46:10.785966', '2026-01-19 00:46:10.785970') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (13.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '67120dc4c10f39e360fe154e75c8e5940d2a96ab', '2026-01-19 00:46:10.800270', '2026-01-19 00:46:10.800273') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
+  [1m[35m (57.3ms)[0m  [1m[35mCREATE DATABASE "app_test" ENCODING = 'unicode' /*application='TodoList'*/[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (15.4ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE INDEX "index_boards_on_user_id" ON "boards" ("user_id") /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "position" integer, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_lists_on_board_id" ON "lists" ("board_id") /*application='TodoList'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "list_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_list_id" ON "tasks" ("list_id") /*application='TodoList'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "profile_picture_url" character varying, "photo_url" character varying) /*application='TodoList'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_uid" ON "users" ("uid") /*application='TodoList'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "boards" ADD CONSTRAINT "fk_rails_0732f8ef3d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "lists" ADD CONSTRAINT "fk_rails_0d3f677137"
+FOREIGN KEY ("board_id")
+  REFERENCES "boards" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_02b8df67b5"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250714135327) /*application='TodoList'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250711135934),
+(20250711135032),
+(20250609165341),
+(20250609155342),
+(20250609142817),
+(20250602115349),
+(20250602114636),
+(20250527122355); /*application='TodoList'*/[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-19 00:46:11.046550', '2026-01-19 00:46:11.046554') RETURNING "key" /*application='TodoList'*/[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Update (7.7ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-01-16 23:52:58.104953' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-01-19 00:46:11.052860' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '67120dc4c10f39e360fe154e75c8e5940d2a96ab', '2026-01-19 00:46:11.057197', '2026-01-19 00:46:11.057199') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."uid" = 'default_user_uid' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "uid", "created_at", "updated_at", "profile_picture_url", "photo_url") VALUES ('Default User', 'default_user@example.com', 'default_user_uid', '2026-01-19 00:46:11.194313', '2026-01-19 00:46:11.194313', NULL, NULL) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (15.0ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mBoard Create (1.3ms)[0m  [1m[32mINSERT INTO "boards" ("name", "created_at", "updated_at", "user_id") VALUES ('Meu Primeiro Board', '2026-01-19 00:46:11.246180', '2026-01-19 00:46:11.246180', 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (16.7ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (1.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.5ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Trabalho', 'Tarefas relacionadas ao trabalho.', NULL, '2026-01-19 00:46:11.301319', '2026-01-19 00:46:11.301319', 1, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (20.6ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (1.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Pessoal', 'Tarefas pessoais e do dia a dia.', NULL, '2026-01-19 00:46:11.339655', '2026-01-19 00:46:11.339655', 2, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (9.9ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (1.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Estudos', 'Tarefas e metas de estudo.', NULL, '2026-01-19 00:46:11.372478', '2026-01-19 00:46:11.372478', 3, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (8.8ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Prova de Semiótica', 'Parte básica de semiótica, a prova tem folhinha com textos e imagens.', 2, NULL, '2026-01-26', NULL, '2026-01-19 00:46:11.414874', '2026-01-19 00:46:11.414874', 3) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (36.2ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (2.9ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Apresentação de Artigos', 'Pesquisar artigos relacionados a semiótica e apresentar em grupo.', 1, NULL, '2026-02-02', NULL, '2026-01-19 00:46:11.461110', '2026-01-19 00:46:11.461110', 3) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (26.3ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (3.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Reunião de Planejamento Sprint', 'Definir as prioridades para a próxima sprint.', 2, NULL, '2026-01-21', NULL, '2026-01-19 00:46:11.495954', '2026-01-19 00:46:11.495954', 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (1.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Comprar mantimentos', 'Lista de compras para a semana.', 1, NULL, '2026-01-20', NULL, '2026-01-19 00:46:11.511785', '2026-01-19 00:46:11.511785', 2) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+Started GET "/" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/login.html.erb within layouts/application
+  Rendered shared/icons/_google_icon.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered shared/icons/_fastfoward_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/icons/_team_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_paint_brush_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered pages/login.html.erb within layouts/application (Duration: 52.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 68.6ms | GC: 0.0ms)
+Completed 200 OK in 109ms (Views: 72.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/tailwind-7c4256a7.css" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/agility_gif-7c84db65.gif" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/customization_gif-c57fcaf6.gif" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Started GET "/assets/gif_summarize_tasks-46377d2e.gif" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/sortablejs-d5bfebfd.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Started GET "/assets/controllers/authentication_controller-8f3d4123.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Started GET "/assets/controllers/card_hover_controller-850bb0c2.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/inline_list_add_controller-38f6d07f.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/inline_task_edit_controller-41fdb3bd.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/list_color_controller-227e148f.js" for 172.18.0.1 at 2026-01-19 00:46:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/multi_select_controller-0fbb29da.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/placeholder_form_manager_controller-7c3d9f56.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/sortable_controller-fd4aff6f.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/task_card_controller-aeae8772.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/theme_controller-d1a4f05d.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/toggle_controller-f258911c.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/user_dropdown_controller-5d083f96.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/dropdown_controller-dffc8a5c.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/inline_board_add_controller-0c140be5.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/inline_edit_controller-afa13a72.js" for 172.18.0.1 at 2026-01-19 00:46:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/application-3affb389.js" for 172.18.0.1 at 2026-01-19 01:09:10 +0000
+Started GET "/assets/application-bfcdf840.js" for 172.18.0.1 at 2026-01-19 01:09:10 +0000
+Started GET "/" for 172.18.0.1 at 2026-01-19 01:09:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by PagesController#login as */*
+  Rendering layout layouts/application.html.erb
+  Rendering pages/login.html.erb within layouts/application
+  Rendered shared/icons/_google_icon.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_fastfoward_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_team_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_paint_brush_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered pages/login.html.erb within layouts/application (Duration: 11.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.6ms | GC: 1.0ms)
+Completed 200 OK in 26ms (Views: 19.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/assets/controllers/index-ee64e1f1.js" for 172.18.0.1 at 2026-01-19 01:09:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus.min-2395e199.js.map" for 172.18.0.1 at 2026-01-19 01:09:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/turbo.min-02fd5b81.js.map" for 172.18.0.1 at 2026-01-19 01:09:15 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus.min-2395e199.js.map" for 172.18.0.1 at 2026-01-19 01:09:15 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (68.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (74.7ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE INDEX "index_boards_on_user_id" ON "boards" ("user_id") /*application='TodoList'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "position" integer, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE INDEX "index_lists_on_board_id" ON "lists" ("board_id") /*application='TodoList'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "list_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_list_id" ON "tasks" ("list_id") /*application='TodoList'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "profile_picture_url" character varying, "photo_url" character varying) /*application='TodoList'*/[0m
+  [1m[35m (86.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_uid" ON "users" ("uid") /*application='TodoList'*/[0m
+  [1m[35m (63.9ms)[0m  [1m[35mALTER TABLE "boards" ADD CONSTRAINT "fk_rails_0732f8ef3d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "lists" ADD CONSTRAINT "fk_rails_0d3f677137"
+FOREIGN KEY ("board_id")
+  REFERENCES "boards" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_02b8df67b5"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (103.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (14.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250714135327) /*application='TodoList'*/[0m
+  [1m[35m (18.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250711135934),
+(20250711135032),
+(20250609165341),
+(20250609155342),
+(20250609142817),
+(20250602115349),
+(20250602114636),
+(20250527122355); /*application='TodoList'*/[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-19 01:15:10.567850', '2026-01-19 01:15:10.567856') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '795308575d6921dd67c70f5d747de72cf47ae69b', '2026-01-16 23:52:58.129669', '2026-01-16 23:52:58.129672') RETURNING "key" /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (68.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '67120dc4c10f39e360fe154e75c8e5940d2a96ab', '2026-01-19 01:15:10.585382', '2026-01-19 01:15:10.585383') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='TodoList'*/[0m
+  [1m[35m (120.1ms)[0m  [1m[35mCREATE DATABASE "app_test" ENCODING = 'unicode' /*application='TodoList'*/[0m
+  [1m[35mSQL (2.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TodoList'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (83.9ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "name" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE INDEX "index_boards_on_user_id" ON "boards" ("user_id") /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "position" integer, "board_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_lists_on_board_id" ON "lists" ("board_id") /*application='TodoList'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "priority" integer, "completed_at" timestamp(6), "due_date" date, "due_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "list_id" bigint NOT NULL) /*application='TodoList'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_list_id" ON "tasks" ("list_id") /*application='TodoList'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE /*application='TodoList'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "profile_picture_url" character varying, "photo_url" character varying) /*application='TodoList'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_uid" ON "users" ("uid") /*application='TodoList'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "boards" ADD CONSTRAINT "fk_rails_0732f8ef3d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "lists" ADD CONSTRAINT "fk_rails_0d3f677137"
+FOREIGN KEY ("board_id")
+  REFERENCES "boards" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_02b8df67b5"
+FOREIGN KEY ("list_id")
+  REFERENCES "lists" ("id")
+ /*application='TodoList'*/[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250714135327) /*application='TodoList'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250711135934),
+(20250711135032),
+(20250609165341),
+(20250609155342),
+(20250609142817),
+(20250602115349),
+(20250602114636),
+(20250527122355); /*application='TodoList'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-01-19 01:15:11.068911', '2026-01-19 01:15:11.068914') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.0ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-01-19 01:15:11.073588' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '67120dc4c10f39e360fe154e75c8e5940d2a96ab', '2026-01-19 01:15:11.079091', '2026-01-19 01:15:11.079096') RETURNING "key" /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."uid" = 'default_user_uid' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "uid", "created_at", "updated_at", "profile_picture_url", "photo_url") VALUES ('Default User', 'default_user@example.com', 'default_user_uid', '2026-01-19 01:15:11.397369', '2026-01-19 01:15:11.397369', NULL, NULL) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (35.0ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mBoard Create (1.2ms)[0m  [1m[32mINSERT INTO "boards" ("name", "created_at", "updated_at", "user_id") VALUES ('Meu Primeiro Board', '2026-01-19 01:15:11.559858', '2026-01-19 01:15:11.559858', 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (0.9ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Trabalho', 'Tarefas relacionadas ao trabalho.', NULL, '2026-01-19 01:15:11.592616', '2026-01-19 01:15:11.592616', 1, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (75.0ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.6ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (2.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.5ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Pessoal', 'Tarefas pessoais e do dia a dia.', NULL, '2026-01-19 01:15:11.692182', '2026-01-19 01:15:11.692182', 2, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (77.2ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mList Load (1.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('Estudos', 'Tarefas e metas de estudo.', NULL, '2026-01-19 01:15:11.821437', '2026-01-19 01:15:11.821437', 3, 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (18.3ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTask Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (1.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Prova de Semiótica', 'Parte básica de semiótica, a prova tem folhinha com textos e imagens.', 2, NULL, '2026-01-26', NULL, '2026-01-19 01:15:11.895972', '2026-01-19 01:15:11.895972', 3) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (14.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (1.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Apresentação de Artigos', 'Pesquisar artigos relacionados a semiótica e apresentar em grupo.', 1, NULL, '2026-02-02', NULL, '2026-01-19 01:15:11.917759', '2026-01-19 01:15:11.917759', 3) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (1.2ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Reunião de Planejamento Sprint', 'Definir as prioridades para a próxima sprint.', 2, NULL, '2026-01-21', NULL, '2026-01-19 01:15:11.922977', '2026-01-19 01:15:11.922977', 1) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('Comprar mantimentos', 'Lista de compras para a semana.', 1, NULL, '2026-01-20', NULL, '2026-01-19 01:15:11.928550', '2026-01-19 01:15:11.928550', 2) RETURNING "id" /*application='TodoList'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'default_user@example.com' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 1 AND "boards"."name" = 'Meu Primeiro Board' LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Trabalho' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Pessoal' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 1 AND "lists"."name" = 'Estudos' ORDER BY "lists"."position" ASC LIMIT 1 /*application='TodoList'*/[0m
   [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."name" = 'Trabalho' LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mBoard Create (0.7ms)[0m  [1m[32mINSERT INTO "boards" ("name", "description", "color", "created_at", "updated_at") VALUES ('Trabalho', 'Tarefas relacionadas ao trabalho.', NULL, '2026-01-16 23:58:51.035137', '2026-01-16 23:58:51.035137') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."name" = 'Pessoal' LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mBoard Create (2.1ms)[0m  [1m[32mINSERT INTO "boards" ("name", "description", "color", "created_at", "updated_at") VALUES ('Pessoal', 'Tarefas pessoais e do dia a dia.', NULL, '2026-01-16 23:58:51.050040', '2026-01-16 23:58:51.050040') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (4.5ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."name" = 'Estudos' LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mBoard Create (6.5ms)[0m  [1m[32mINSERT INTO "boards" ("name", "description", "color", "created_at", "updated_at") VALUES ('Estudos', 'Tarefas e metas de estudo.', NULL, '2026-01-16 23:58:51.082203', '2026-01-16 23:58:51.082203') RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTask Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (5.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "board_id") VALUES ('Prova de Semiótica', 'Parte básica de semiótica, a prova tem folhinha com textos e imagens.', 2, NULL, '2026-01-23', NULL, '2026-01-16 23:58:51.150696', '2026-01-16 23:58:51.150696', 3) RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (10.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (6.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "board_id") VALUES ('Apresentação de Artigos', 'Pesquisar artigos relacionados a semiótica e apresentar em grupo.', 1, NULL, '2026-01-30', NULL, '2026-01-16 23:58:51.184196', '2026-01-16 23:58:51.184196', 3) RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "board_id") VALUES ('Reunião de Planejamento Sprint', 'Definir as prioridades para a próxima sprint.', 2, NULL, '2026-01-18', NULL, '2026-01-16 23:58:51.201209', '2026-01-16 23:58:51.201209', 1) RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TodoList'*/[0m
-  [1m[36mTask Create (1.2ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "board_id") VALUES ('Comprar mantimentos', 'Lista de compras para a semana.', 1, NULL, '2026-01-17', NULL, '2026-01-16 23:58:51.204823', '2026-01-16 23:58:51.204823', 2) RETURNING "id" /*application='TodoList'*/[0m
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='TodoList'*/[0m
-Started GET "/" for 172.18.0.1 at 2026-01-16 23:58:55 +0000
+Started GET "/" for 172.18.0.1 at 2026-01-19 01:15:42 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
-Processing by TasksController#index as HTML
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TodoList'*/[0m
+Processing by PagesController#login as HTML
   Rendering layout layouts/application.html.erb
-  Rendering tasks/index.html.erb within layouts/application
-  [1m[36mBoard Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "boards" LIMIT 1 /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:7
-  [1m[36mBoard Load (1.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:9
-  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."board_id" IN (1, 2, 3) /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:9
-  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."board_id" = 1 ORDER BY "tasks"."completed_at" ASC, "tasks"."due_date" ASC, "tasks"."priority" DESC /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:20
-  [1m[36mTask Load (2.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."board_id" = 2 ORDER BY "tasks"."completed_at" ASC, "tasks"."due_date" ASC, "tasks"."priority" DESC /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:20
-  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."board_id" = 3 ORDER BY "tasks"."completed_at" ASC, "tasks"."due_date" ASC, "tasks"."priority" DESC /*action='index',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/index.html.erb:20
-  Rendered tasks/index.html.erb within layouts/application (Duration: 226.3ms | GC: 1.9ms)
-  Rendered layout layouts/application.html.erb (Duration: 259.3ms | GC: 1.9ms)
-Completed 200 OK in 428ms (Views: 267.4ms | ActiveRecord: 25.3ms (6 queries, 0 cached) | GC: 13.7ms)
+  Rendering pages/login.html.erb within layouts/application
+  Rendered shared/icons/_google_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered shared/icons/_fastfoward_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_team_icon.html.erb (Duration: 1.2ms | GC: 0.0ms)
+  Rendered shared/icons/_paint_brush_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered pages/login.html.erb within layouts/application (Duration: 41.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 57.8ms | GC: 0.0ms)
+Completed 200 OK in 81ms (Views: 60.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
 
 
-Started GET "/assets/tailwind-0168ad3f.css" for 172.18.0.1 at 2026-01-16 23:58:56 +0000
+Started GET "/" for 172.18.0.1 at 2026-01-19 01:28:23 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Started GET "/tasks/3/edit" for 172.18.0.1 at 2026-01-17 00:00:53 +0000
-Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by TasksController#edit as HTML
-  Parameters: {"id" => "3"}
-  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 3 LIMIT 1 /*action='edit',application='TodoList',controller='tasks'*/[0m
-  ↳ app/controllers/tasks_controller.rb:60:in 'TasksController#set_task'
+Processing by PagesController#login as HTML
   Rendering layout layouts/application.html.erb
-  Rendering tasks/edit.html.erb within layouts/application
-  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" ORDER BY "boards"."name" ASC /*action='edit',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/_form.html.erb:43
-  Rendered tasks/_form.html.erb (Duration: 25.2ms | GC: 0.0ms)
-  Rendered tasks/edit.html.erb within layouts/application (Duration: 26.6ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 27.8ms | GC: 0.0ms)
-Completed 200 OK in 50ms (Views: 28.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+  Rendering pages/login.html.erb within layouts/application
+  Rendered shared/icons/_google_icon.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_fastfoward_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_team_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/icons/_paint_brush_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered pages/login.html.erb within layouts/application (Duration: 6.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | GC: 0.0ms)
+Completed 200 OK in 26ms (Views: 10.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/boards/new" for 172.18.0.1 at 2026-01-17 00:07:01 +0000
+Started POST "/login" for 172.18.0.1 at 2026-01-19 01:28:36 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by BoardsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering boards/new.html.erb within layouts/application
-  Rendered boards/new.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 2.7ms | GC: 0.0ms)
-Completed 200 OK in 25ms (Views: 3.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Processing by SessionsController#create as */*
+  Parameters: {"id_token" => "[FILTERED]", "session" => {"id_token" => "[FILTERED]"}}
+Received login request with token: present
+Request headers: {"HTTP_HOST" => "127.0.0.1:3000", "HTTP_USER_AGENT" => "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0", "HTTP_ACCEPT" => "*/*", "HTTP_ACCEPT_LANGUAGE" => "en-US,en;q=0.9", "HTTP_ACCEPT_ENCODING" => "gzip, deflate, br, zstd", "HTTP_REFERER" => "http://127.0.0.1:3000/", "HTTP_X_CSRF_TOKEN" => "CbmaT1zspnEJppANyPH564BqsP-xHSXVmGSF8kH-eFiEvkky-z-68aTpz4KhwIm8Xf9wAa7BHcHLR-uCV7l4GQ", "HTTP_ORIGIN" => "http://127.0.0.1:3000", "HTTP_DNT" => "1", "HTTP_CONNECTION" => "keep-alive", "HTTP_COOKIE" => "_todo_list_session=CguM%2B6WNgeFcPfrhDQwucq%2BHyOQjZX8BJcyt08KnVXR65GPhHNGZ%2BQpfUesmwDPIFYENE11%2Bx8k1zMb0OTBwftxEQ9GK%2FhmzsQeV5Y0EwS0N5lcoa2E5m2Ktgtdi0gnqPoLW9JUssQnQMA96gyDofM0Yk4Hvy1typyqoVqSLhfmxHdEmojOA38TEmajI1Y6UouFw3f3HgmC75pLb4b3LLtv9UDG%2BiSnSI2Rx%2FBxkzNgbEuXqDHfmEazGYTgZzSTG97uzVrM6GdB5AWMr7wy3zpfnJ4gVHGve0oo%3D--wtYL06JP9IxTAu90--Xsswie4QeuFl8oDddKS52Q%3D%3D", "HTTP_SEC_FETCH_DEST" => "empty", "HTTP_SEC_FETCH_MODE" => "cors", "HTTP_SEC_FETCH_SITE" => "same-origin", "HTTP_PRIORITY" => "u=4", "HTTP_VERSION" => "HTTP/1.1"}
+Attempting to decode JWT token...
+Token decoded successfully. Payload keys: ["name", "picture", "iss", "aud", "auth_time", "user_id", "sub", "iat", "exp", "email", "email_verified", "firebase"]
+Token header: {"alg" => "RS256", "kid" => "1c3219834da50e20faeaea7c86ce7b5538f17be1", "typ" => "JWT"}
+User email: lucassga500@gmail.com
+Token issuer: https://securetoken.google.com/todolist-ruby
+Token audience: todolist-ruby
+Token subject: cgebc5219iUWA5NgMVU8Fm0wCEW2
+Token validation passed. Creating/finding user...
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."uid" = 'cgebc5219iUWA5NgMVU8Fm0wCEW2' LIMIT 1 /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+Creating new user: lucassga500@gmail.com
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'lucassga500@gmail.com' LIMIT 1 /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."uid" = 'cgebc5219iUWA5NgMVU8Fm0wCEW2' LIMIT 1 /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "uid", "created_at", "updated_at", "profile_picture_url", "photo_url") VALUES ('Lucas', 'lucassga500@gmail.com', 'cgebc5219iUWA5NgMVU8Fm0wCEW2', '2026-01-19 01:28:36.770516', '2026-01-19 01:28:36.770516', NULL, 'https://lh3.googleusercontent.com/a/ACg8ocKcGUMEoNNATZ5E1oHKbG3yuI6kpdgVEkbY9g6VIToXrjTPumQG=s96-c') RETURNING "id" /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT /*action='create',application='TodoList',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:58:in 'SessionsController#create'
+User authenticated successfully: lucassga500@gmail.com (ID: 2)
+Completed 200 OK in 185ms (Views: 0.3ms | ActiveRecord: 25.6ms (4 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/boards/new" for 172.18.0.1 at 2026-01-17 00:07:03 +0000
+Started GET "/boards" for 172.18.0.1 at 2026-01-19 01:28:37 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by BoardsController#new as HTML
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."id" ASC LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in 'ApplicationController#set_current_board'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Create (2.2ms)[0m  [1m[32mINSERT INTO "boards" ("name", "created_at", "updated_at", "user_id") VALUES ('Meu Primeiro Board', '2026-01-19 01:28:38.021806', '2026-01-19 01:28:38.021806', 2) RETURNING "id" /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in 'ApplicationController#set_current_board'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in 'ApplicationController#set_current_board'
   Rendering layout layouts/application.html.erb
-  Rendering boards/new.html.erb within layouts/application
-  Rendered boards/new.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
-Completed 200 OK in 22ms (Views: 4.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 8.8ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 25.9ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 1.7ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 4.7ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 35.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 72.8ms | GC: 0.0ms)
+Completed 200 OK in 270ms (Views: 75.4ms | ActiveRecord: 15.6ms (5 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/tasks/new?board_id=1" for 172.18.0.1 at 2026-01-17 00:07:04 +0000
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 01:28:46 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by TasksController#new as HTML
-  Parameters: {"board_id" => "1"}
+Processing by AisController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
   Rendering layout layouts/application.html.erb
-  Rendering tasks/new.html.erb within layouts/application
-  [1m[36mBoard Load (17.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" ORDER BY "boards"."name" ASC /*action='new',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/_form.html.erb:43
-  Rendered tasks/_form.html.erb (Duration: 34.8ms | GC: 0.0ms)
-  Rendered tasks/new.html.erb within layouts/application (Duration: 41.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 43.1ms | GC: 0.0ms)
-Completed 200 OK in 58ms (Views: 22.4ms | ActiveRecord: 21.3ms (1 query, 0 cached) | GC: 0.0ms)
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 1.6ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 49.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 1.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 24.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 80.4ms | GC: 0.0ms)
+Completed 200 OK in 108ms (Views: 81.7ms | ActiveRecord: 1.4ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/tasks/new?board_id=1" for 172.18.0.1 at 2026-01-17 00:07:06 +0000
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 01:28:48 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by TasksController#new as HTML
-  Parameters: {"board_id" => "1"}
+Processing by AisController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
   Rendering layout layouts/application.html.erb
-  Rendering tasks/new.html.erb within layouts/application
-  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" ORDER BY "boards"."name" ASC /*action='new',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/_form.html.erb:43
-  Rendered tasks/_form.html.erb (Duration: 16.3ms | GC: 0.0ms)
-  Rendered tasks/new.html.erb within layouts/application (Duration: 16.5ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 16.8ms | GC: 0.0ms)
-Completed 200 OK in 37ms (Views: 17.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | GC: 0.0ms)
+Completed 200 OK in 33ms (Views: 5.8ms | ActiveRecord: 1.0ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/boards/new" for 172.18.0.1 at 2026-01-17 00:07:07 +0000
+Started GET "/?board_id=2" for 172.18.0.1 at 2026-01-19 01:28:50 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by BoardsController#new as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering boards/new.html.erb within layouts/application
-  Rendered boards/new.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.0ms)
-Completed 200 OK in 17ms (Views: 5.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Processing by PagesController#login as HTML
+  Parameters: {"board_id" => "2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='login',application='TodoList',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:31:in 'ApplicationController#set_current_board'
+Redirected to http://127.0.0.1:3000/app
+Filter chain halted as :redirect_if_authenticated rendered or redirected
+Completed 302 Found in 25ms (ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
-Started GET "/tasks/new?board_id=1" for 172.18.0.1 at 2026-01-17 00:07:20 +0000
+Started GET "/app" for 172.18.0.1 at 2026-01-19 01:28:50 +0000
 Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
-Processing by TasksController#new as HTML
-  Parameters: {"board_id" => "1"}
+Processing by BoardsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (15.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
   Rendering layout layouts/application.html.erb
-  Rendering tasks/new.html.erb within layouts/application
-  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" ORDER BY "boards"."name" ASC /*action='new',application='TodoList',controller='tasks'*/[0m
-  ↳ app/views/tasks/_form.html.erb:43
-  Rendered tasks/_form.html.erb (Duration: 6.0ms | GC: 0.0ms)
-  Rendered tasks/new.html.erb within layouts/application (Duration: 6.4ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 7.3ms | GC: 0.0ms)
-Completed 200 OK in 17ms (Views: 8.5ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+  Rendering boards/index.html.erb within layouts/application
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 ORDER BY "lists"."position" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/boards/index.html.erb:7
+  Rendered lists/_add_new_list_placeholder.html.erb (Duration: 2.4ms | GC: 0.0ms)
+  Rendered boards/index.html.erb within layouts/application (Duration: 5.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='index',application='TodoList',controller='boards'*/[0m
+  ↳ app/views/layouts/_sidebar.html.erb:34
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 1.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 7.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | GC: 0.0ms)
+Completed 200 OK in 44ms (Views: 12.7ms | ActiveRecord: 16.3ms (4 queries, 0 cached) | GC: 15.0ms)
+
+
+Started POST "/lists" for 172.18.0.1 at 2026-01-19 01:28:51 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ListsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "list" => {"name" => ""}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/models/list.rb:53:in 'List#set_default_name'
+  [1m[36mList Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "lists" WHERE "lists"."board_id" = 2 AND "lists"."name" = 'New List' LIMIT 1 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/models/list.rb:53:in 'List#set_default_name'
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."board_id" = 2 AND ("lists"."position" IS NOT NULL) ORDER BY "lists"."position" DESC LIMIT 1 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:26:in 'block in ListsController#create'
+  [1m[36mList Create (0.5ms)[0m  [1m[32mINSERT INTO "lists" ("name", "description", "color", "created_at", "updated_at", "position", "board_id") VALUES ('New List', NULL, NULL, '2026-01-19 01:28:51.862270', '2026-01-19 01:28:51.862270', 1, 2) RETURNING "id" /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:26:in 'block in ListsController#create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:26:in 'block in ListsController#create'
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered lists/_color_selection.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/views/lists/_tasks_container.html.erb:3:in 'Enumerable#partition'
+  Rendered lists/_tasks_container.html.erb (Duration: 18.6ms | GC: 0.0ms)
+  Rendered lists/_list.html.erb (Duration: 106.8ms | GC: 0.9ms)
+  [1m[36mList Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "lists" WHERE "lists"."board_id" = 2 /*action='create',application='TodoList',controller='lists'*/[0m
+  ↳ app/controllers/lists_controller.rb:37:in 'block (2 levels) in ListsController#create'
+Completed 200 OK in 199ms (Views: 0.1ms | ActiveRecord: 8.0ms (7 queries, 0 cached) | GC: 2.4ms)
+
+
+Started POST "/lists/4/tasks" for 172.18.0.1 at 2026-01-19 01:28:53 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "commit" => "Add Task", "list_id" => "4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC LIMIT 1 /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:55:in 'TasksController#set_list_from_url_params'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:7:in 'TasksController#create'
+  [1m[36mTask Create (1.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "priority", "completed_at", "due_date", "due_time", "created_at", "updated_at", "list_id") VALUES ('New Task', NULL, NULL, NULL, NULL, NULL, '2026-01-19 01:28:53.401305', '2026-01-19 01:28:53.401305', 4) RETURNING "id" /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:7:in 'TasksController#create'
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:7:in 'TasksController#create'
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."list_id" = 4 /*action='create',application='TodoList',controller='tasks'*/[0m
+  ↳ app/views/lists/_tasks_container.html.erb:3:in 'Enumerable#partition'
+  Rendered shared/icons/_three_dot_icon.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/icons/_calendar_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_graph_icon.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered tasks/_task.html.erb (Duration: 8.9ms | GC: 0.0ms)
+  Rendered lists/_completed_tasks_section.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered lists/_tasks_container.html.erb (Duration: 28.6ms | GC: 0.3ms)
+Completed 200 OK in 81ms (Views: 1.6ms | ActiveRecord: 6.0ms (5 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/ai" for 172.18.0.1 at 2026-01-19 01:28:56 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  Rendering layout layouts/application.html.erb
+  Rendering ais/show.html.erb within layouts/application
+  Rendered shared/icons/_arrow_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 ORDER BY "boards"."name" ASC /*action='show',application='TodoList',controller='ais'*/[0m
+  ↳ app/views/ais/show.html.erb:28
+  Rendered shared/icons/_check_icon.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_brain_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered ais/show.html.erb within layouts/application (Duration: 3.0ms | GC: 0.0ms)
+  Rendered shared/_user_dropdown.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered shared/icons/_sidebar_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_moon_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_sun_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered shared/icons/_close_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered collection of boards/_board.html.erb [1 times] (Duration: 6.4ms | GC: 0.0ms)
+  Rendered shared/icons/_sparkles_icon.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layouts/_sidebar.html.erb (Duration: 9.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 13.0ms | ActiveRecord: 1.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai" for 172.18.0.1 at 2026-01-19 01:29:00 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AisController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "board_ids" => ["2"], "commit" => "Generate Summary"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:51:in 'ApplicationController#current_user'
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/application_controller.rb:35:in 'ApplicationController#set_current_board'
+  [1m[36mBoard Pluck (0.3ms)[0m  [1m[34mSELECT "boards"."id" FROM "boards" WHERE "boards"."user_id" = 2 AND "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/controllers/ais_controller.rb:18:in 'AisController#create'
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:45:in 'OpenRouterService#call'
+User message being sent to AI:
+  [1m[36mCACHE Task Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL LIMIT 1[0m
+  ↳ app/services/open_router_service.rb:76:in 'OpenRouterService#user_message'
+  [1m[36mTask Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:80:in 'OpenRouterService#user_message'
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2 /*action='create',application='TodoList',controller='ais'*/[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Task analysis for boards: Meu Primeiro Board
+
+⚪ NO PRIORITY SET:
+- "New Task"
+
+
+Total: 1 tasks in 1 board(s)
+For recommendations, consider:
+- High priority tasks are more important
+- Overdue tasks need immediate attention
+- Tasks due soon should be prioritized
+- Tasks without deadlines can be left for later
+
+IMPORTANT: Always mention tasks by their exact name as shown in quotes above, never use 'task 1', 'task 2' or generic terms.
+
+==================================================
+Trying model: deepseek/deepseek-chat-v3-0324:free (attempt 1/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model deepseek/deepseek-chat-v3-0324:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for deepseek/deepseek-chat-v3-0324:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: deepseek/deepseek-chat:free (attempt 2/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model deepseek/deepseek-chat:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for deepseek/deepseek-chat:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: mistralai/mistral-7b-instruct:free (attempt 3/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model mistralai/mistral-7b-instruct:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for mistralai/mistral-7b-instruct:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: huggingface/zephyr-7b-beta:free (attempt 4/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model huggingface/zephyr-7b-beta:free failed: 400 - Bad Request
+Response body: {"error":{"message":"huggingface/zephyr-7b-beta:free is not a valid model ID","code":400},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: openchat/openchat-7b:free (attempt 5/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+Model openchat/openchat-7b:free failed: 404 - Not Found
+Response body: {"error":{"message":"No endpoints found for openchat/openchat-7b:free.","code":404},"user_id":"user_2wYXA1yRGdlrgOAKYNolFWsFxwL"}
+Trying model: meta-llama/llama-3.2-3b-instruct:free (attempt 6/7)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:79:in 'OpenRouterService#user_message'
+Total tasks received: 1
+Task: New Task, Priority: '', Due: 
+  [1m[36mCACHE Task Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL ORDER BY "tasks"."created_at" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE List Load (0.0ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = 4 ORDER BY "lists"."position" ASC[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+  [1m[36mCACHE Board Load (0.0ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = 2[0m
+  ↳ app/services/open_router_service.rb:85:in 'Enumerable#map'
+Boards found: 1
+Board: Meu Primeiro Board
+Board names string: 'Meu Primeiro Board'
+High priority: 0 tasks
+Medium priority: 0 tasks
+Low priority: 0 tasks
+No priority: 1 tasks
+Task details: ID=5, Title='New Task', Priority=, Due=
+Formatted task: - "New Task"
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" INNER JOIN "lists" ON "lists"."id" = "tasks"."list_id" WHERE "lists"."board_id" = 2 AND "tasks"."completed_at" IS NULL[0m
+  ↳ app/services/open_router_service.rb:150:in 'OpenRouterService#user_message'
+  Rendered ais/_summary_response.html.erb (Duration: 12.1ms | GC: 0.0ms)
+Completed 200 OK in 13465ms (Views: 0.5ms | ActiveRecord: 3.3ms (41 queries, 33 cached) | GC: 1.4ms)
 
 

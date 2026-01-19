@@ -1,4 +1,5 @@
 # Be sure to restart your server when you modify this file.
+require 'securerandom'
 
 # Define an application-wide content security policy.
 # See the Securing Rails Applications Guide for more information:
@@ -49,7 +50,8 @@ Rails.application.configure do
   end
 
   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  # Use a stable, non-empty nonce to avoid malformed CSP headers when session ID is missing.
+  config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = %w(style-src)
 
   # Report violations without enforcing the policy.
