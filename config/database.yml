@@ -17,5 +17,10 @@ test:
 # Adjust production config as needed,
 # wont't be used by docker-compose in development.
 production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %> # Ex, if you use DATABASE_URL in production
+  primary:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  cable:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
