@@ -6,10 +6,9 @@ class OpenRouterService
 
   # Available free models in order of preference
   FREE_MODELS = [
-    "nvidia/nemotron-3-nano-30b-a3b:free",
-    "meta-llama/llama-3.3-70b-instruct:free",
+    "xiaomi/mimo-v2-flash:free",
     "tngtech/deepseek-r1t-chimera:free",
-    "xiaomi/mimo-v2-flash:free"
+    "meta-llama/llama-3.3-70b-instruct:free"
   ].freeze
 
   # Default parameters for the API
