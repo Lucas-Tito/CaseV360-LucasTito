@@ -71,6 +71,13 @@ Gerenciamento de tarefas focado em **agilidade**, **baixo atrito** e **apoio por
   * Design moderno;
   * Uso de **GIFs** para demonstrar funcionalidades reais da aplicação.
 
+<br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/507450c1-bae6-4212-b9b8-bb20663753b0" alt="screenshot 1" width="55%" border-radius:"10px"/>
+</p>
+<br>
+
+
 ---
 
 ## ☁️ Deploy no Render
