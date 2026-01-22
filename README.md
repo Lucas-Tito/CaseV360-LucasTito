@@ -1,7 +1,7 @@
-🔗 **Demo (produção):**
+🔗 **Demo:**
 👉 [https://lucastito-casev360.onrender.com](https://lucastito-casev360.onrender.com)
 
-> ⚠️ Observação: pode ser que o primeiro acesso demore um pouquinho (cold start). Se o sistema ficar um tempo sem uso (cerca de 15 minutos), ele pode dar uma pausa (spin down). Nesse caso, é só atualizar a página (refresh) e seguir normalmente.
+> ⚠️ Observação: O primeiro acesso demora um pouquinho (por conta do cold start do Render). Se o sistema ficar um tempo sem uso (cerca de 15 minutos), ele pode dar uma pausa (spin down). Nesse caso, é só atualizar a página e seguir normalmente.
 
 ---
 
@@ -71,6 +71,13 @@ Gerenciamento de tarefas focado em **agilidade**, **baixo atrito** e **apoio por
   * Design moderno;
   * Uso de **GIFs** para demonstrar funcionalidades reais da aplicação.
 
+<br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/507450c1-bae6-4212-b9b8-bb20663753b0" alt="screenshot 1" width="55%" border-radius:"10px"/>
+</p>
+<br>
+
+
 ---
 
 ## ☁️ Deploy no Render
@@ -125,3 +132,8 @@ As ações do usuário são processadas pelos controllers, que aplicam as regras
 * Truncate automático de caracteres para evitar quebra de layout com nomes longos.
 
 ---
+
+<br><br>
+<p align="center">
+  Fiz o projeto com muita dedicação e carinho, espero que gostem :)
+</p>
